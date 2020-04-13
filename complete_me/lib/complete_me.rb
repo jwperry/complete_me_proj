@@ -82,4 +82,10 @@ class CompleteMe
     end
     location
   end
+
+  def select(input, word)
+    # Lower rank = higher priority. This decrements instead of increments
+    # because of how Turing spec_harness is written.
+    find_word(word).rank -= 1
+  end
 end

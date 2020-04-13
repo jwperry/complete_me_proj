@@ -45,4 +45,27 @@ class CompleteMeTest < Minitest::Test
     suggestions = ["a", "b"], ["c", "d"]
     assert_equal ["za", "zb", "zc", "zd"], @complete.update_suggestions(suggestions, Node.new("z"))
   end
+
+  def test_that_select_decrements_rank
+    @complete.insert("a")
+    @complete.select("", "a")
+    assert_equal (-1), @complete.head.branches["a"].rank
+  end
+
+  def test_that_select_decrements_rank_multiple_times
+    @complete.insert("a")
+    @complete.select("", "a")
+    @complete.select("", "a")
+    @complete.select("", "a")
+    assert_equal (-3), @complete.head.branches["a"].rank
+  end
+
+  def test_that_suggest_sorts_by_decremented_rank
+    @complete.populate("an\nand\nandy")
+    assert_equal ["an", "and", "andy"], @complete.suggest("a")
+    @complete.select("", "and")
+    @complete.select("", "and")
+    @complete.select("", "andy")
+    assert_equal ["and", "andy", "an"], @complete.suggest("a")
+  end
 end
