@@ -55,4 +55,15 @@ class TrieTest < Minitest::Test
     assert_equal "d", @complete.head.branches["d"].data
     assert_equal "e", @complete.head.branches["e"].data
   end
+
+  def test_that_populate_inserts_entire_word
+    @complete.populate("cab")
+    assert @complete.head.branches["c"].branches["a"].branches["b"]
+  end
+
+  def test_that_populate_inserts_multiple_words
+    @complete.populate("a\nb")
+    assert_equal "a", @complete.head.branches["a"].data
+    assert_equal "b", @complete.head.branches["b"].data
+  end
 end

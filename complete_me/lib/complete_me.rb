@@ -18,4 +18,8 @@ class CompleteMe
   def insert(word)
     @trie.insert(word.downcase)
   end
+
+  def populate(words)
+    @trie.populate(words)
+  end
 end

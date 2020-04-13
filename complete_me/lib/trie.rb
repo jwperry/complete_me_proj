@@ -15,4 +15,8 @@ class Trie
     end
     location.mark_as_word
   end
+
+  def populate(words)
+    words.each_line { |line| insert(line) }
+  end
 end
