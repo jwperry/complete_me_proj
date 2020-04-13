@@ -13,7 +13,7 @@ class CompleteMeTest < Minitest::Test
     assert @complete.trie
   end
 
-  def test_that_can_return_head_node
+  def test_that_it_can_return_head_node
     assert @complete.head
     assert_equal "", @complete.head.data
   end

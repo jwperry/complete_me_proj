@@ -17,4 +17,42 @@ class TrieTest < Minitest::Test
     assert @trie.head
     assert_equal @trie.head.data, ""
   end
+
+  def test_that_insert_adds_branches_to_head
+    @complete.insert("a")
+    refute @complete.head.branches.empty?
+  end
+
+  def test_that_insert_marks_as_word
+    @complete.insert("a")
+    assert @complete.head.branches["a"].is_word
+  end
+
+  def test_that_insert_adds_entire_word
+    @complete.insert("cab")
+    assert @complete.head.branches["c"].branches["a"].branches["b"]
+  end
+
+  def test_that_insert_adds_entire_word_and_marks_as_word
+    @complete.insert("cab")
+    assert @complete.head.branches["c"].branches["a"].branches["b"].is_word
+  end
+
+  def test_that_inserted_data_is_correct
+    @complete.insert("d")
+    assert_equal "d", @complete.head.branches["d"].data
+  end
+
+  def test_that_inserted_data_is_correct_with_multiple_steps
+    @complete.insert("de")
+    assert_equal "d", @complete.head.branches["d"].data
+    assert_equal "e", @complete.head.branches["d"].branches["e"].data
+  end
+
+  def test_that_inserted_data_is_correct_on_different_branches
+    @complete.insert("d")
+    @complete.insert("e")
+    assert_equal "d", @complete.head.branches["d"].data
+    assert_equal "e", @complete.head.branches["e"].data
+  end
 end
