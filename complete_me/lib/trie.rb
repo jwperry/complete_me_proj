@@ -19,4 +19,12 @@ class Trie
   def populate(words)
     words.each_line { |line| insert(line) }
   end
+
+  def count(node=@head)
+    counter = 0
+    node.branches.each do |k, v|
+      counter = counter + count(v)
+    end
+    node.is_word ? counter +=1 : counter
+  end
 end

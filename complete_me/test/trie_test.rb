@@ -66,4 +66,26 @@ class TrieTest < Minitest::Test
     assert_equal "a", @complete.head.branches["a"].data
     assert_equal "b", @complete.head.branches["b"].data
   end
+
+  def test_that_count_returns_zero_if_only_head
+    assert_equal 0, @complete.count
+  end
+
+  def test_that_count_returns_one_for_single_word
+    @complete.insert("z")
+    assert_equal 1, @complete.count
+  end
+
+  def test_that_count_returns_correct_value_for_multiple_words
+    @complete.insert("b")
+    @complete.insert("bad")
+    @complete.insert("c")
+    @complete.insert("cab")
+    assert_equal 4, @complete.count
+  end
+
+  def test_that_populated_words_return_correct_count
+    @complete.populate("art\nbad\ncam\ndin\neat")
+    assert_equal 5, @complete.count
+  end
 end

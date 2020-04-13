@@ -22,4 +22,8 @@ class CompleteMe
   def populate(words)
     @trie.populate(words)
   end
+
+  def count
+    @trie.count
+  end
 end
