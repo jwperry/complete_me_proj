@@ -1,4 +1,4 @@
-gem 'minitest', '~> 5.2'
+gem 'minitest', '~> 5.14'
 require 'minitest/autorun'
 require_relative '../lib/complete_me'
 
