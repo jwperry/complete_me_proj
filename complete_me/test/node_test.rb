@@ -24,4 +24,8 @@ class NodeTest < Minitest::Test
   def test_that_a_new_node_has_no_branches_by_default
     assert_equal @node.branches, {}
   end
+
+  def test_that_a_node_is_rank_zero_by_default
+    assert_equal 0, @node.rank
+  end
 end
