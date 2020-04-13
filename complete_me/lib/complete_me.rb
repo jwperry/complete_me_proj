@@ -14,4 +14,8 @@ class CompleteMe
   def head
     @trie.head
   end
+
+  def insert(word)
+    @trie.insert(word.downcase)
+  end
 end
