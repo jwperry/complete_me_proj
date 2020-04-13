@@ -88,4 +88,14 @@ class CompleteMe
     # because of how Turing spec_harness is written.
     find_word(word).rank -= 1
   end
+
+  def read_csv(csv)
+    data = ""
+    file = File.open(csv)
+    loop { break if file.readchar == "\r" }
+    file.readlines.each do |line|
+      data << line.split(",").last
+    end
+    data
+  end
 end
